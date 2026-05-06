@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 프롬프트 복사기</title>
+<style>
+  body { 
+    font-family: sans-serif; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    margin-top: 50px; 
+    background-color: rgb(249, 249, 249); 
+  }
+  .container { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    max-width: 500px; 
+    width: 100%; 
+    text-align: center; 
+  }
+  h1 {
+    font-size: 24px;
+    color: rgb(51, 51, 51);
+  }
+  .prompt-container {
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    padding-bottom: 20px;
+  }
+  .prompt-container:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .prompt-box { 
+    background: rgb(238, 242, 245); 
+    padding: 15px; 
+    border-radius: 5px; 
+    margin-bottom: 15px; 
+    text-align: left; 
+    word-break: break-all; 
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  button { 
+    background-color: rgb(0, 123, 255); 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 14px;
+    transition: background-color 0.2s;
+  }
+  button:hover {
+    background-color: rgb(0, 86, 179);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>AI 프롬프트 모음</h1>
+  <p>원하는 프롬프트 아래의 복사 버튼을 누르세요.</p>
+
+  <div class="prompt-container">
+    <div class="prompt-box" id="prompt1">미래 도시의 화려한 네온사인, 비 내리는 사이버펑크 거리, 8k 해상도, 시네마틱 조명</div>
+    <button onclick="copyText('prompt1')">복사하기</button>
+  </div>
+
+  <div class="prompt-container">
+    <div class="prompt-box" id="prompt2">따뜻한 햇살이 비추는 평화로운 숲속의 작은 나무집, 수채화 스타일, 파스텔 톤</div>
+    <button onclick="copyText('prompt2')">복사하기</button>
+  </div>
+</div>
+
+<script>
+  function copyText(elementId) {
+    var textToCopy = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(textToCopy).then(function() {
+      alert("프롬프트가 복사되었습니다!");
+    }).catch(function(err) {
+      console.error('복사 실패:', err);
+      alert("복사에 실패했습니다.");
+    });
+  }
+</script>
+
+</body>
+</html>
