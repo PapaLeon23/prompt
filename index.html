@@ -3,78 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 프롬프트 복사기</title>
+<title>AI 카네이션 프롬프트</title>
 <style>
   body { 
-    font-family: sans-serif; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    margin-top: 50px; 
-    background-color: rgb(249, 249, 249); 
+    font-family: 'Malgun Gothic', sans-serif; 
+    margin: 0;
+    padding: 0;
+    background-color: rgb(245, 247, 250); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
-  .container { 
-    background: white; 
-    padding: 30px; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-    max-width: 500px; 
-    width: 100%; 
-    text-align: center; 
+  .layout-wrapper {
+    display: flex;
+    max-width: 1000px;
+    width: 90%;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+  .left-panel {
+    flex: 1;
+    padding: 40px;
+    background-color: rgb(255, 255, 255);
+    border-right: 1px solid rgb(235, 235, 235);
+  }
+  .right-panel {
+    flex: 1;
+    padding: 40px;
+    background-color: rgb(249, 250, 252);
+    display: flex;
+    flex-direction: column;
   }
   h1 {
-    font-size: 24px;
-    color: rgb(51, 51, 51);
+    font-size: 22px;
+    color: rgb(33, 37, 41);
+    margin-top: 0;
+    margin-bottom: 20px;
   }
-  .prompt-container {
-    margin-bottom: 30px;
-    border-bottom: 1px solid rgb(238, 238, 238);
-    padding-bottom: 20px;
+  .instruction-list {
+    padding-left: 20px;
+    line-height: 1.8;
+    color: rgb(73, 80, 87);
+    font-size: 16px;
   }
-  .prompt-container:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
+  .instruction-list li {
+    margin-bottom: 15px;
   }
   .prompt-box { 
-    background: rgb(238, 242, 245); 
-    padding: 15px; 
-    border-radius: 5px; 
-    margin-bottom: 15px; 
+    background: rgb(255, 255, 255); 
+    padding: 20px; 
+    border-radius: 8px; 
+    border: 1px solid rgb(222, 226, 230);
+    margin-bottom: 20px; 
     text-align: left; 
-    word-break: break-all; 
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgb(52, 58, 64);
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 500px;
+    white-space: pre-wrap; /* 줄바꿈 유지 */
   }
   button { 
-    background-color: rgb(0, 123, 255); 
+    background-color: rgb(10, 126, 164); 
     color: white; 
     border: none; 
-    padding: 10px 20px; 
-    border-radius: 5px; 
+    padding: 15px 20px; 
+    border-radius: 8px; 
     cursor: pointer; 
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
     transition: background-color 0.2s;
+    width: 100%;
   }
   button:hover {
-    background-color: rgb(0, 86, 179);
+    background-color: rgb(8, 100, 130);
+  }
+
+  /* 모바일 화면 대응 */
+  @media (max-width: 768px) {
+    .layout-wrapper {
+      flex-direction: column;
+      margin: 20px 0;
+    }
+    .left-panel {
+      border-right: none;
+      border-bottom: 1px solid rgb(235, 235, 235);
+    }
+    .prompt-box {
+      max-height: 300px;
+    }
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>AI 프롬프트 모음</h1>
-  <p>원하는 프롬프트 아래의 복사 버튼을 누르세요.</p>
-
-  <div class="prompt-container">
-    <div class="prompt-box" id="prompt1">미래 도시의 화려한 네온사인, 비 내리는 사이버펑크 거리, 8k 해상도, 시네마틱 조명</div>
-    <button onclick="copyText('prompt1')">복사하기</button>
+<div class="layout-wrapper">
+  <!-- 왼쪽 설명 영역 -->
+  <div class="left-panel">
+    <h1>사용법(ChatGPT 기준)</h1>
+    <ol class="instruction-list">
+      <li>인물의 얼굴이 잘 나온 사진을 Chat GPT에 업로드하고 오른쪽의 프롬프트를 복사한 후 붙여 넣는다.</li>
+      <li><strong>엄마/아빠/할머니/할아버지/선생님</strong> 중 하나를 골라 프롬프트 안 "ㅇㅇㅇ"에 넣는다.</li>
+    </ol>
   </div>
 
-  <div class="prompt-container">
-    <div class="prompt-box" id="prompt2">따뜻한 햇살이 비추는 평화로운 숲속의 작은 나무집, 수채화 스타일, 파스텔 톤</div>
-    <button onclick="copyText('prompt2')">복사하기</button>
+  <!-- 오른쪽 프롬프트 영역 -->
+  <div class="right-panel">
+    <div class="prompt-box" id="mainPrompt">
+      
+"ㅇㅇㅇ용으로 만들어줘"
+
+[STEP 1 – TARGET DETECTION] If the first line contains: 
+- "엄마용" → TARGET = 엄마 
+- "아빠용" → TARGET = 아빠 
+- "할머니용" → TARGET = 할머니 
+- "할아버지용" → TARGET = 할아버지 
+- "선생님용" → TARGET = 선생님 
+[STEP 2 – TARGET LOCK] - Replace TARGET with the actual word (예: 엄마) 
+- ALL text must be ONLY for that TARGET 
+- NEVER generate other targets 
+- DO NOT output any variable form [STRICT TARGET VALIDATION] 
+- Only ONE target word allowed in entire image 
+- If any other target word appears → REGENERATE 
+[STEP 3 – STYLE MAPPING] 
+엄마 / 아빠: - 사랑, 애교 
+할머니 / 할아버지: - 따뜻함, 건강 기원 
+선생님: - 존중, 감사 
+[CRITICAL TEXT RULE] 
+- DO NOT use any fixed example sentences 
+- Generate NEW phrases dynamically 
+- ALL text must naturally include TARGET word [BACKGROUND LOCK – CRITICAL] 
+- MUST use original uploaded image 그대로 
+- DO NOT change background 
+- DO NOT recreate scene 
+- DO NOT move subject 
+- ONLY add small elements 
+[IDENTITY LOCK – PRO VERSION] 
+- MUST use EXACT same face 
+- identical eyes, nose, mouth, proportions DO NOT change: 
+- eye shape / distance - nose / mouth structure 
+- face ratio - pattern (동물일 경우)
+[MAIN ACTION – CRITICAL] 
+- main subject MUST hold a carnation with both hands 
+- MUST extend the flower toward the camera (giving gesture)
+ - flower positioned slightly below chin, centered
+ - expression: bright smile while giving the flower 
+[FLOWER PRIORITY] 
+- main carnation MUST be clearly visible (no obstruction) - larger than mini flowers 
+- visual focal point after face [CONSISTENCY RULE]
+ - All mini versions MUST be identical clones 
+- NOT similar → MUST be same identity
+ [CAMERA LOCK] - same angle - same lens 느낌 - same lighting direction [COMPOSITION] - main subject 유지 (위치 변경 금지) - mini versions 5~7개 - size: 10~15% (매우 작게) [PLACEMENT RULE] - 바닥 / 모서리 / 주변 사물 위 - 중앙 침범 금지 - main과 겹침 금지 - 떠있는 느낌 금지 [MINI ACTION] 각각 다르게: - 카네이션 안고있기 - 냄새 맡기 - 건네기 - 뛰는 느낌 - "TARGET 생각중…" 포즈 - 얼굴 비비기 - 꽃에 기대기 [STYLE] - realistic photo edit ONLY - NOT illustration - NOT collage - NOT poster [TEXT] MAIN TITLE: → TARGET 기반 문장 1개 (크게) SUB TEXT: → TARGET 기반 랜덤 문장 여러 개 - MUST be dynamically generated - DO NOT include fixed phrases - 얼굴 가리지 않기 [VISUAL PRIORITY] - main subject dominates - minis are secondary [FINAL CHECK] - 타겟 단일 유지 - 얼굴 동일성 유지 - 배경 유지 - 자연스러운 편집 느낌 이미지 만들어줘</div>
+    <button onclick="copyText('mainPrompt')">프롬프트 복사하기</button>
   </div>
 </div>
 
@@ -82,10 +166,10 @@
   function copyText(elementId) {
     var textToCopy = document.getElementById(elementId).innerText;
     navigator.clipboard.writeText(textToCopy).then(function() {
-      alert("프롬프트가 복사되었습니다!");
+      alert("프롬프트가 성공적으로 복사되었습니다!");
     }).catch(function(err) {
       console.error('복사 실패:', err);
-      alert("복사에 실패했습니다.");
+      alert("복사에 실패했습니다. 브라우저 설정을 확인해 주세요.");
     });
   }
 </script>
